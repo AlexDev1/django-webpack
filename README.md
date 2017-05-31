@@ -1,1 +1,251 @@
 # django-webpack
+
+## Server
+
+Install homebrew
+
+    which brew # check if homebrew already exists
+    https://brew.sh/ # otherwise install homebrew
+
+Install virtualenv
+
+    which virtualenv # check if virtualenv already exists
+    pip install virtualenv # otherwise install virtualenv
+
+Create a virtual environment
+
+    virtualenv venv
+
+Activate virtual environment
+
+    source venv/bin/activate
+
+Install Django
+
+    pip install django
+
+Start project
+
+    django-admin startproject foo
+
+Create index.html
+
+    mkdir foo/foo/templates
+    touch foo/foo/templates/index.html
+
+Edit index.html
+
+    {% load static %}
+    <h1>
+        {{ mensaje }}
+        <img src="{% static 'img/heart.svg' %}" alt="">
+    </h1>
+
+    <div id="bar"></div>
+
+    <script src="{% static 'js/foo.bundle.js' %}"></script>
+    <script src="{% static 'js/bar.bundle.js' %}"></script>
+
+Create views.py
+
+    touch foo/foo/views.py
+
+Edit views.py
+
+    from django.shortcuts import render
+
+    def index(request):
+        context = {
+            'mensaje': 'Saludos!',
+        }
+        return render(request, 'index.html', context)
+
+Edit foo/foo/urls.py
+
+    from django.conf.urls import url
+    # from django.contrib import admin
+    from . import views
+
+    urlpatterns = [
+        # url(r'^admin/', admin.site.urls),
+        url(r'^$', views.index, name='index'),
+    ]
+
+Create static directory
+
+    mkdir foo/foo/static
+
+Create img directory and image
+
+    mkdir foo/foo/static/img
+    touch foo/foo/static/img/heart.svg
+
+Edit image
+
+    <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>Heart</title><path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path></svg>
+
+Edit foo/foo/settings.py
+
+    INSTALLED_APPS = [
+        # 'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        'foo',
+    ]
+
+    STATIC_ROOT = os.path.join(BASE_DIR, 'foo/foo/static/')
+
+Run server
+
+    python foo/manage.py runserver
+
+## Client
+
+Install yarn
+
+    brew update
+    brew install yarn
+
+Initialize yarn
+
+    yarn init
+
+Install webpack
+
+    yarn add path webpack --dev
+
+Create webpack.config.js
+
+    touch webpack.config.js
+
+Edit webpack.config.js
+
+    const path = require('path');
+
+    module.exports = {
+        entry: {
+            foo: './foo/foo/static/src/js/foo',
+            bar: './foo/foo/static/src/js/bar'
+        },
+
+        output: {
+            filename: '[name].bundle.js',
+            path: path.resolve('./foo/foo/static/js/')
+        },
+
+        module: {
+            loaders: [
+                { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
+                { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
+            ]
+        }
+    }
+
+Install babel
+
+    yarn add babel-loader babel-core babel-preset-es2015 babel-preset-react --dev
+
+Create .babelrc
+
+    touch .babelrc
+
+Edit .babelrc
+
+    {
+        "presets":[
+            "es2015", "react"
+        ]
+    }
+
+Create foo.js
+
+    mkdir foo/foo/static/src/js
+    touch foo/foo/static/src/js/foo.js
+
+Edit foo.js
+
+    console.log('foo');
+
+Create bar.js
+
+    touch foo/foo/static/src/js/bar.js
+
+Edit bar.js
+
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import App from './components/App.jsx';
+
+    ReactDOM.render(<App />, document.getElementById('bar'));
+
+Install react
+
+    yarn add react react-dom --dev
+
+Create Heart.jsx
+
+    mkdir foo/foo/static/src/js/icons 
+    touch foo/foo/static/src/js/icons/Heart.jsx
+
+Edit Heart.jsx
+
+    import React from 'react';
+
+    class Heart extends React.Component {
+        render() {
+            return (
+                <svg width={this.props.width} height={this.props.height} viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                    <title>{this.props.title}</title>
+                    <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+                </svg>
+            );
+        }
+    }
+
+    Heart.defaultProps = {
+        width: '32',
+        height: '32',
+        title: 'Heart',
+    };
+
+    export default Heart;
+
+Create App.jsx
+
+    mkdir foo/foo/static/src/js/components 
+    touch foo/foo/static/src/js/components/App.jsx
+
+Edit App.jsx
+
+    import React from 'react';
+    import Heart from '../icons/Heart.jsx';
+
+    export default class App extends React.Component {
+        render() {
+            return (
+                <figure style={{fill: 'orange'}}>
+                    <Heart width="64" height="64" />
+                    <img src="/static/img/heart.svg" alt="" />
+                    <figcaption>Render image inline, or reference it remotely.</figcaption>
+                </figure>
+            );
+        }
+    }
+
+Compile or watch
+
+    ./node_modules/.bin/webpack --config webpack.config.js
+    ./node_modules/.bin/webpack --config webpack.config.js --watch
+
+Edit package.json
+
+    "scripts": {
+      "watch": "webpack --config webpack.config.js --watch"
+    },
+
+Watch
+
+    yarn watch
