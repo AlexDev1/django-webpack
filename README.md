@@ -36,15 +36,30 @@ Create index.html
 Edit index.html
 
     {% load static %}
-    <h1>
-        {{ mensaje }}
-        <img src="{% static 'img/heart.svg' %}" alt="">
-    </h1>
 
-    <div id="bar"></div>
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Ba Weep Grana Weep Nini Bom</title>
+            <link rel="stylesheet" href="{% static 'css/main.bundle.css' %}">
+        </head>
+        <body>
+            <h1>
+                {{ mensaje }}
+            </h1>
 
-    <script src="{% static 'js/foo.bundle.js' %}"></script>
-    <script src="{% static 'js/bar.bundle.js' %}"></script>
+            <div>
+                <img src="{% static 'img/heart.svg' %}" alt="">
+            </div>
+
+            <div id="bar"></div>
+
+            <script src="{% static 'js/foo.bundle.js' %}"></script>
+            <script src="{% static 'js/bar.bundle.js' %}"></script>
+        </body>
+    </html>
 
 Create views.py
 
@@ -96,8 +111,6 @@ Edit foo/foo/settings.py
         'foo',
     ]
 
-    STATIC_ROOT = os.path.join(BASE_DIR, 'foo/foo/static/')
-
 Run server
 
     python foo/manage.py runserver
@@ -124,24 +137,76 @@ Create webpack.config.js
 Edit webpack.config.js
 
     const path = require('path');
+    const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
     module.exports = {
         entry: {
-            foo: './foo/foo/static/src/js/foo',
-            bar: './foo/foo/static/src/js/bar'
+            foo: './foo/foo/assets/js/foo',
+            bar: './foo/foo/assets/js/bar',
+            main: './foo/foo/assets/sass/main.scss'
         },
 
         output: {
-            filename: '[name].bundle.js',
-            path: path.resolve('./foo/foo/static/js/')
+            filename: './js/[name].bundle.js',
+            path: path.resolve('./foo/foo/static/')
         },
 
         module: {
             loaders: [
-                { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-                { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
+                {
+                    test: /\.js$/,
+                    loader: 'babel-loader',
+                    exclude: [
+                        /node_modules/
+                    ]
+                },
+                {
+                    test: /\.jsx$/,
+                    loader: 'babel-loader',
+                    exclude: [
+                        /node_modules/
+                    ]
+                },
+                {
+                    test: /\.(sass|scss)$/,
+                    loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
+                }
             ]
-        }
+        },
+
+        plugins: [
+            new ExtractTextPlugin('./css/[name].bundle.css')
+        ]
+    }
+
+Install sass
+
+    yarn add --dev css-loader style-loader extract-text-webpack-plugin sass-loader node-sass
+
+Create main.scss
+
+    mkdir foo/foo/assets/sass
+    touch foo/foo/assets/sass/main.scss
+    
+Edit main.scss
+
+    $body-background-color: aqua;
+
+    @import 'reset';
+
+    body {
+        background-color: $body-background-color;
+    }
+
+Create _reset.scss
+
+    touch foo/foo/assets/sass/_reset.scss
+
+Edit _reset.scss
+
+    * {
+        padding: 0;
+        margin: 0;
     }
 
 Install babel
