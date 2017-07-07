@@ -314,3 +314,33 @@ Edit package.json
 Watch
 
     yarn watch
+
+## Static Files Storage
+
+Create storage.py
+
+    touch foo/storage.py
+
+Update storage.py
+
+    vi foo/storage.py
+
+    from django.contrib.staticfiles.storage import HashedFilesMixin, ManifestStaticFilesStorage, StaticFilesStorage
+    from django.conf import settings
+
+
+    class FooStaticFilesStorage(ManifestStaticFilesStorage, StaticFilesStorage):
+
+        patterns = HashedFilesMixin.patterns + (
+            ("*.jsx", (
+                (r"""(src=["']\s*(.*?)["'])""", """src=\"%s\""""),
+            )),
+        )
+
+Update settings.py
+
+    vi foo/foo/settings.py
+
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+    STATICFILES_STORAGE = 'foo.storage.FooStaticFilesStorage'
