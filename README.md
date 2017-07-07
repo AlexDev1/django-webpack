@@ -332,8 +332,8 @@ Update storage.py
     class FooStaticFilesStorage(ManifestStaticFilesStorage, StaticFilesStorage):
 
         patterns = HashedFilesMixin.patterns + (
-            ("*.jsx", (
-                (r"""(src=["']\s*(.*?)["'])""", """src=\"%s\""""),
+            ("*.bundle.js", (
+                (r"""(src:\s["']\s*(.*?)["'])""", """src: \'%s\'"""), # e.g. src: '/static/img/heart.svg'
             )),
         )
 
