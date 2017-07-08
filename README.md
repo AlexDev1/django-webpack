@@ -321,9 +321,7 @@ Create storage.py
 
     touch foo/storage.py
 
-Update storage.py
-
-    vi foo/storage.py
+Edit storage.py
 
     from django.contrib.staticfiles.storage import HashedFilesMixin, ManifestStaticFilesStorage, StaticFilesStorage
     from django.conf import settings
@@ -337,10 +335,8 @@ Update storage.py
             )),
         )
 
-Update settings.py
-
-    vi foo/foo/settings.py
+Edit foo/foo/settings.py
 
     STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'media/')
     STATICFILES_STORAGE = 'foo.storage.FooStaticFilesStorage'
