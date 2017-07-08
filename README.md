@@ -1,6 +1,6 @@
 # django-webpack
 
-## Server
+## Django
 
 Install homebrew
 
@@ -90,12 +90,12 @@ Create static directory
 
     mkdir foo/foo/static
 
-Create img directory and image
+Create heart.svg
 
     mkdir foo/foo/static/img
     touch foo/foo/static/img/heart.svg
 
-Edit image
+Edit heart.svg
 
     <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>Heart</title><path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path></svg>
 
@@ -115,7 +115,7 @@ Run server
 
     python foo/manage.py runserver
 
-## Client
+## Webpack
 
 Install yarn
 
@@ -227,8 +227,8 @@ Edit .babelrc
 
 Create foo.js
 
-    mkdir foo/foo/static/src/js
-    touch foo/foo/static/src/js/foo.js
+    mkdir foo/foo/assets/js
+    touch foo/foo/assets/js/foo.js
 
 Edit foo.js
 
@@ -236,15 +236,15 @@ Edit foo.js
 
 Create bar.js
 
-    touch foo/foo/static/src/js/bar.js
+    touch foo/foo/assets/js/bar.js
 
 Edit bar.js
 
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import App from './components/App.jsx';
+    import Figure from './components/Figure.jsx';
 
-    ReactDOM.render(<App />, document.getElementById('bar'));
+    ReactDOM.render(<Figure />, document.getElementById('bar'));
 
 Install react
 
@@ -252,8 +252,8 @@ Install react
 
 Create Heart.jsx
 
-    mkdir foo/foo/static/src/js/icons 
-    touch foo/foo/static/src/js/icons/Heart.jsx
+    mkdir foo/foo/assets/js/icons 
+    touch foo/foo/assets/js/icons/Heart.jsx
 
 Edit Heart.jsx
 
@@ -278,23 +278,23 @@ Edit Heart.jsx
 
     export default Heart;
 
-Create App.jsx
+Create Figure.jsx
 
-    mkdir foo/foo/static/src/js/components 
-    touch foo/foo/static/src/js/components/App.jsx
+    mkdir foo/foo/assets/js/components 
+    touch foo/foo/assets/js/components/Figure.jsx
 
-Edit App.jsx
+Edit Figure.jsx
 
     import React from 'react';
     import Heart from '../icons/Heart.jsx';
 
-    export default class App extends React.Component {
+    export default class Figure extends React.Component {
         render() {
             return (
                 <figure style={{fill: 'orange'}}>
                     <Heart width="64" height="64" />
                     <img src="/static/img/heart.svg" alt="" />
-                    <figcaption>Render image inline, or reference it remotely.</figcaption>
+                    <figcaption>Render svg inline, or reference it remotely.</figcaption>
                 </figure>
             );
         }
