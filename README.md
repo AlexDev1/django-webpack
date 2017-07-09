@@ -244,6 +244,8 @@ Edit bar.js
     import ReactDOM from 'react-dom';
     import Figure from './components/Figure.jsx';
 
+    // require('../sass/bar.scss');
+
     ReactDOM.render(<Figure />, document.getElementById('bar'));
 
 Install react
