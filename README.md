@@ -119,7 +119,8 @@ Run server
 
 Install latest npm
 
-    # download if not already installed, https://www.npmjs.com/get-npm#install-npm, otherwise...
+    # download if not already installed, https://www.npmjs.com/get-npm#install-npm
+    # otherwise...
     npm install npm@latest -g
 
 Install yarn
