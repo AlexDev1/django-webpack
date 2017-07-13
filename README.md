@@ -117,6 +117,10 @@ Run server
 
 ## Webpack
 
+Install latest npm
+
+    npm install npm@latest -g # or download if not already installed, https://www.npmjs.com/get-npm#install-npm
+
 Install yarn
 
     brew update
