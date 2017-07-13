@@ -123,6 +123,10 @@ Install latest npm
     # otherwise...
     npm install npm@latest -g
 
+Initialize npm
+
+    npm init --yes
+
 Install yarn
 
     brew update
