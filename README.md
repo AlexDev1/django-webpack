@@ -127,6 +127,10 @@ Initialize npm
 
     npm init --yes
 
+Install path and webpack
+
+    npm install path webpack --save-dev
+
 Install yarn
 
     brew update
