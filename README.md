@@ -195,6 +195,10 @@ Edit webpack.config.js
         ]
     }
 
+Create assets directory
+
+    mkdir foo/foo/assets
+
 Install sass
 
     yarn add --dev css-loader style-loader extract-text-webpack-plugin sass-loader node-sass
