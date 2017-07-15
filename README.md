@@ -198,6 +198,7 @@ Edit webpack.config.js
 Install sass
 
     yarn add --dev css-loader style-loader extract-text-webpack-plugin sass-loader node-sass
+    npm install css-loader style-loader extract-text-webpack-plugin sass-loader node-sass --save-dev
 
 Create main.scss
 
@@ -228,6 +229,7 @@ Edit _reset.scss
 Install babel
 
     yarn add babel-loader babel-core babel-preset-es2015 babel-preset-react --dev
+    npm install babel-loader babel-core babel-preset-es2015 babel-preset-react --save-dev
 
 Create .babelrc
 
@@ -267,6 +269,7 @@ Edit bar.js
 Install react
 
     yarn add react react-dom --dev
+    npm install react react-dom --save-dev
 
 Create Heart.jsx
 
