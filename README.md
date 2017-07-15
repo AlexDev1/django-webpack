@@ -133,19 +133,6 @@ Install path and webpack
 
     npm install path webpack --save-dev
 
-Install yarn
-
-    brew update
-    brew install yarn
-
-Initialize yarn
-
-    yarn init
-
-Install webpack
-
-    yarn add path webpack --dev
-
 Create webpack.config.js
 
     touch webpack.config.js
@@ -157,8 +144,8 @@ Edit webpack.config.js
 
     module.exports = {
         entry: {
-            foo: './foo/foo/assets/js/foo',
-            bar: './foo/foo/assets/js/bar',
+            foo: './foo/foo/assets/js/foo.js',
+            bar: './foo/foo/assets/js/bar.js',
             main: './foo/foo/assets/sass/main.scss'
         },
 
@@ -170,21 +157,12 @@ Edit webpack.config.js
         module: {
             loaders: [
                 {
-                    test: /\.js$/,
+                    test: /\.(js|jsx)$/,
                     loader: 'babel-loader',
-                    exclude: [
-                        /node_modules/
-                    ]
+                    exclude: /node_modules/
                 },
                 {
-                    test: /\.jsx$/,
-                    loader: 'babel-loader',
-                    exclude: [
-                        /node_modules/
-                    ]
-                },
-                {
-                    test: /\.(sass|scss)$/,
+                    test: /\.scss$/,
                     loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
                 }
             ]
@@ -201,7 +179,6 @@ Create assets directory
 
 Install sass
 
-    yarn add --dev css-loader style-loader extract-text-webpack-plugin sass-loader node-sass
     npm install css-loader style-loader extract-text-webpack-plugin sass-loader node-sass --save-dev
 
 Create main.scss
@@ -232,7 +209,6 @@ Edit _reset.scss
 
 Install babel
 
-    yarn add babel-loader babel-core babel-preset-es2015 babel-preset-react --dev
     npm install babel-loader babel-core babel-preset-es2015 babel-preset-react --save-dev
 
 Create .babelrc
@@ -272,7 +248,6 @@ Edit bar.js
 
 Install react
 
-    yarn add react react-dom --dev
     npm install react react-dom --save-dev
 
 Create Heart.jsx
@@ -338,7 +313,7 @@ Edit package.json
 
 Watch
 
-    yarn watch
+    npm watch
 
 ## Static Files Storage
 
