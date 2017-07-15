@@ -125,6 +125,8 @@ Install latest npm
 
 Initialize npm
 
+    # if npm updated from previous step,
+    # then open a new tab before running this command
     npm init --yes
 
 Install path and webpack
