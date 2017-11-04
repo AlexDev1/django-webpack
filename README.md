@@ -6,11 +6,13 @@ Install homebrew
 
     which brew # check if homebrew already exists
     https://brew.sh/ # otherwise install homebrew
+    https://docs.brew.sh/FAQ.html # or update brew if need be
 
 Install virtualenv
 
     which virtualenv # check if virtualenv already exists
     pip install virtualenv # otherwise install virtualenv
+    https://pip.pypa.io/en/stable/user_guide/#only-if-needed-recursive-upgrade # or update virtualenv if need be
 
 Create a virtual environment
 
