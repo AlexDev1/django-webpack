@@ -8,10 +8,16 @@ Install homebrew
     https://brew.sh/ # otherwise install homebrew
     https://docs.brew.sh/FAQ.html # or update brew if need be
 
+Install python
+
+    which python # check if built-in system python installed, e.g. /usr/bin/python
+    brew install python # then install python locally
+    which python3 # should return /usr/local/bin/python3
+
 Install virtualenv
 
     which virtualenv # check if virtualenv already exists
-    pip install virtualenv # otherwise install virtualenv
+    pip3 install virtualenv # otherwise install virtualenv
     https://pip.pypa.io/en/stable/user_guide/#only-if-needed-recursive-upgrade # or update virtualenv if need be
 
 Create a virtual environment
