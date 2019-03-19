@@ -1,0 +1,11 @@
+# REMOVE the next three lines to stop ignoring files
+*
+!.gitignore
+!README.md
+
+# UNCOMMENT the next five lines to start tracking files
+# __pycache__
+# node_modules
+# static
+# static_root
+# venv
