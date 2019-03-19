@@ -35,7 +35,7 @@ Install/upgrade virtualenv
 
     pip3 install --upgrade virtualenv
 
-## Set up environment (python)
+## Set up python environment
 
 Create virtual environment
 
@@ -66,7 +66,7 @@ Exit virtual environment
 
     deactivate
 
-## Install packages (Node)
+## Install npm packages
 
 Initialize npm
 
@@ -513,20 +513,6 @@ Edit ultra/wsgi.py
 
     application = get_wsgi_application()
 
-## Ignore files
-
-Create .gitignore
-
-    touch .gitignore
-
-Edit .gitignore
-
-    __pycache__
-    node_modules
-    static
-    static_root
-    venv
-
 ## Review in development
 
 Compile assets
@@ -555,11 +541,11 @@ Exit virtual environment
 
 ## Configure gunicorn
 
-create gunicorn.conf.py
+Create gunicorn.conf.py
 
     touch gunicorn.conf.py
 
-edit gunicorn.conf.py
+Edit gunicorn.conf.py
 
     # reserve port 9000 for gunicorn
     bind = '127.0.0.1:9000'
@@ -573,11 +559,11 @@ edit gunicorn.conf.py
 
 ## Configure nginx
 
-create nginx.conf
+Create nginx.conf
 
     touch nginx.conf
 
-edit nginx.conf
+Edit nginx.conf
 
     server {
         # reserve port 80 for nginx
@@ -599,11 +585,11 @@ edit nginx.conf
         }
     }
 
-create servers directory (if not already created)
+Create servers directory (if not already created)
 
     mkdir /usr/local/etc/nginx/servers
 
-link nginx.conf (soft link)
+Soft link nginx.conf
 
     # e.g. full path = (pwd + /nginx.conf)
     ln -s /full_path/to/project/nginx.conf /usr/local/etc/nginx/servers/project-ultra
@@ -673,6 +659,20 @@ Stop gunicorn
 Exit virtual environment
 
     deactivate
+
+## Ignore files
+
+Create .gitignore
+
+    touch .gitignore
+
+Edit .gitignore
+
+    __pycache__
+    node_modules
+    static
+    static_root
+    venv
 
 ## Resources
 
