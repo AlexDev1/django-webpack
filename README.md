@@ -413,13 +413,7 @@ Edit ultra/settings/common.py
 
     import os
 
-    ALLOWED_HOSTS = []
-
-    AUTH_PASSWORD_VALIDATORS = []
-
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # e.g. os.path.join(BASE_DIR, ...)
-
-    DATABASES = {}
 
     INSTALLED_APPS = [
         'django.contrib.staticfiles',
@@ -513,7 +507,7 @@ Edit ultra/wsgi.py
 
     application = get_wsgi_application()
 
-## Review in development
+## Review development
 
 Compile assets
 
@@ -554,7 +548,6 @@ Edit gunicorn.conf.py
     # accesslog = '/full_path/to/project/logs/gunicorn-access.log'
     # loglevel = 'debug'
 
-    # the number of recommended workers is '2 * number of CPUs + 1'
     workers = 1
 
 ## Configure nginx
@@ -570,7 +563,6 @@ Edit nginx.conf
         listen 80;
         server_name localhost;
 
-        # if logs, then make sure to create the logs directory in project root (pwd)
         # access_log /full_path/to/project/logs/access.log;
         # error_log /full_path/to/project/logs/error.log;
 
@@ -580,7 +572,7 @@ Edit nginx.conf
         }
 
         location /static {
-            # e.g. full path = (pwd + /static_root)
+            # e.g. (pwd + /static_root)
             alias /full_path/to/project/static_root;
         }
     }
@@ -591,7 +583,7 @@ Create servers directory (if not already created)
 
 Soft link nginx.conf
 
-    # e.g. full path = (pwd + /nginx.conf)
+    # e.g. (pwd + /nginx.conf)
     ln -s /full_path/to/project/nginx.conf /usr/local/etc/nginx/servers/project-ultra
 
 ## Compile and collect assets
@@ -684,5 +676,4 @@ Edit .gitignore
 * [Django Best Practice: Settings file for multiple environments](https://medium.com/@ayarshabeer/django-best-practice-settings-file-for-multiple-environments-6d71c6966ee2)
 * [Django Debug Toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#getting-the-code)
 * [django.contrib.staticfiles.storage](https://github.com/django/django/blob/master/django/contrib/staticfiles/storage.py)
-* [Getting started with Django](https://www.djangoproject.com/start/)
 * [Make Django's collectstatic command forgiving](https://timonweb.com/tutorials/make-djangos-collectstatic-command-forgiving/)
