@@ -610,7 +610,7 @@ Exit virtual environment
 
     deactivate
 
-## Start gunicorn
+## Simulate production
 
 Start virtual environment
 
@@ -619,12 +619,6 @@ Start virtual environment
 Start gunicorn
 
     gunicorn -c gunicorn.conf.py ultra.wsgi
-
-Navigate to...
-
-    http://localhost:9000/
-
-## Start nginx
 
 Open new terminal
 
@@ -638,19 +632,15 @@ Navigate to...
 
     http://localhost/
 
-## Stop nginx
-
 Stop nginx
 
     nginx -s quit
 
-Close terminal
+Close new terminal
 
     exit
 
-## Stop gunicorn
-
-Stop gunicorn
+Stop gunicorn (inside previously opened terminal)
 
     (control + c)
 
