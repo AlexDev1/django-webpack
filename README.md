@@ -39,6 +39,7 @@ Install/upgrade virtualenv
 
 Create virtual environment
 
+    # this will generate a `venv` directory
     virtualenv venv
 
 Enter virtual environment
@@ -108,9 +109,12 @@ Review packages
 
 ## Configure babel and webpack
 
-Create .babelrc
+Create configuration files
 
     touch .babelrc
+    touch webpack.common.js
+    touch webpack.dev.js
+    touch webpack.prod.js
 
 Edit .babelrc
 
@@ -122,12 +126,6 @@ Edit .babelrc
             ["@babel/plugin-transform-react-jsx", { "pragma":"h" }]
         ]
     }
-
-Create configuration files
-
-    touch webpack.common.js
-    touch webpack.dev.js
-    touch webpack.prod.js
 
 Edit webpack.common.js
 
@@ -539,28 +537,23 @@ Exit virtual environment
 
     deactivate
 
-## Configure gunicorn
+## Configure gunicorn and nginx
 
-Create gunicorn.conf.py
+Create configuration files
 
     touch gunicorn.conf.py
+    touch nginx.conf
 
 Edit gunicorn.conf.py
 
     # reserve port 9000 for gunicorn
     bind = '127.0.0.1:9000'
 
-    # errorlog = '/full_path/to/project/logs/gunicorn-error.log'
-    # accesslog = '/full_path/to/project/logs/gunicorn-access.log'
+    # errorlog = '/full/path/to/project/logs/gunicorn-error.log'
+    # accesslog = '/full/path/to/project/logs/gunicorn-access.log'
     # loglevel = 'debug'
 
     workers = 1
-
-## Configure nginx
-
-Create nginx.conf
-
-    touch nginx.conf
 
 Edit nginx.conf
 
@@ -569,8 +562,8 @@ Edit nginx.conf
         listen 80;
         server_name localhost;
 
-        # access_log /full_path/to/project/logs/access.log;
-        # error_log /full_path/to/project/logs/error.log;
+        # access_log /full/path/to/project/logs/access.log;
+        # error_log /full/path/to/project/logs/error.log;
 
         location / {
             # pass traffic to the gunicorn server
@@ -578,19 +571,19 @@ Edit nginx.conf
         }
 
         location /static {
-            # e.g. (pwd + /static_root)
-            alias /full_path/to/project/static_root;
+            # MAKE SURE TO REPLACE /full/path/to/project WITH pwd
+            alias /full/path/to/project/static_root;
         }
     }
 
-Create servers directory (if not already created)
+Create nginx servers directory (if not already created)
 
     mkdir /usr/local/etc/nginx/servers
 
 Soft link nginx.conf
 
-    # e.g. (pwd + /nginx.conf)
-    ln -s /full_path/to/project/nginx.conf /usr/local/etc/nginx/servers/project-ultra
+    # MAKE SURE TO REPLACE /full/path/to/project WITH pwd
+    ln -s /full/path/to/project/nginx.conf /usr/local/etc/nginx/servers/project-ultra
 
 ## Compile and collect assets
 
@@ -640,7 +633,7 @@ Close new terminal
 
     exit
 
-Stop gunicorn (inside previously opened terminal)
+Stop gunicorn (inside of original terminal)
 
     (control + c)
 
